@@ -4,15 +4,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="using:lab_four_oop.Controls"
         mc:Ignorable="d"
-        d:DesignWidth="1000"
-        d:DesignHeight="700"
+        d:DesignWidth="1100"
+        d:DesignHeight="750"
         x:Class="lab_four_oop.MainWindow"
         Title="Лабораторная работа 4 - Визуальный редактор"
-        Width="1000"
-        Height="700">
+        Width="1100"
+        Height="750">
 
     <Grid RowDefinitions="Auto,*,Auto"
-          ColumnDefinitions="*,220">
+          ColumnDefinitions="*,260">
 
         <Border Grid.Row="0"
                 Grid.Column="0"
@@ -50,9 +50,23 @@
 
             <Separator/>
 
+            <TextBlock Text="Выбор цвета"
+                       FontSize="16"
+                       FontWeight="Bold"/>
+
+            <ColorPicker Name="ShapeColorPicker"
+                         IsAlphaEnabled="False"
+                         IsAlphaVisible="False"
+                         IsColorModelVisible="False"
+                         IsHexInputVisible="True"
+                         MinWidth="180"/>
+
+            <Button Name="ApplyColorButton" Content="Применить цвет"/>
+
+            <Separator/>
+
             <Button Name="DeleteButton" Content="Удалить выделенные"/>
             <Button Name="ClearButton" Content="Очистить всё"/>
-            <Button Name="ColorButton" Content="Изменить цвет"/>
 
         </StackPanel>
 

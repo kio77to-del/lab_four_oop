@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -15,18 +14,6 @@ public partial class MainWindow : Window
     private ShapeStorage storage = new ShapeStorage();
     private EditorTool currentTool = EditorTool.Circle;
 
-    private List<IBrush> availableBrushes = new List<IBrush>
-    {
-        Brushes.LightBlue,
-        Brushes.LightGreen,
-        Brushes.LightPink,
-        Brushes.LightYellow,
-        Brushes.Orange,
-        Brushes.Plum
-    };
-
-    private int currentColorIndex = 0;
-
     public MainWindow()
     {
         InitializeComponent();
@@ -39,14 +26,14 @@ public partial class MainWindow : Window
         var squareButton = this.FindControl<Button>("SquareButton");
         var clearButton = this.FindControl<Button>("ClearButton");
         var deleteButton = this.FindControl<Button>("DeleteButton");
-        var colorButton = this.FindControl<Button>("ColorButton");
+        var applyColorButton = this.FindControl<Button>("ApplyColorButton");
 
         circleButton.Click += OnCircleButtonClick;
         rectangleButton.Click += OnRectangleButtonClick;
         squareButton.Click += OnSquareButtonClick;
         clearButton.Click += OnClearButtonClick;
         deleteButton.Click += OnDeleteButtonClick;
-        colorButton.Click += OnColorButtonClick;
+        applyColorButton.Click += OnApplyColorButtonClick;
 
         drawArea.PointerPressed += OnDrawAreaPointerPressed;
         this.KeyDown += OnWindowKeyDown;
@@ -87,9 +74,10 @@ public partial class MainWindow : Window
         DeleteSelectedShapes();
     }
 
-    private void OnColorButtonClick(object? sender, RoutedEventArgs e)
+    private void OnApplyColorButtonClick(object? sender, RoutedEventArgs e)
     {
         var drawArea = this.FindControl<DrawingArea>("DrawArea");
+        var colorPicker = this.FindControl<ColorPicker>("ShapeColorPicker");
         var selectedShapes = storage.GetSelected();
 
         if (selectedShapes.Count == 0)
@@ -98,18 +86,11 @@ public partial class MainWindow : Window
             return;
         }
 
-        currentColorIndex++;
-
-        if (currentColorIndex >= availableBrushes.Count)
-        {
-            currentColorIndex = 0;
-        }
-
-        var newBrush = availableBrushes[currentColorIndex];
+        var selectedColor = colorPicker.Color;
 
         foreach (var shape in selectedShapes)
         {
-            shape.SetColor(newBrush);
+            shape.SetColor(new SolidColorBrush(selectedColor));
         }
 
         drawArea.InvalidateVisual();
@@ -220,7 +201,6 @@ public partial class MainWindow : Window
         drawArea.Focus();
 
         var point = e.GetPosition(drawArea);
-
         bool ctrlPressed = e.KeyModifiers.HasFlag(KeyModifiers.Control);
 
         var clickedShapes = storage.FindAllShapesAt(point.X, point.Y);
@@ -254,23 +234,23 @@ public partial class MainWindow : Window
             storage.ClearSelection();
         }
 
-        ShapeBase newShape;
+        ShapeBase tempShape;
 
         if (currentTool == EditorTool.Circle)
         {
-            newShape = new CircleShape(0, 0, 80);
+            tempShape = new CircleShape(0, 0, 80);
         }
         else if (currentTool == EditorTool.Rectangle)
         {
-            newShape = new RectangleShape(0, 0, 120, 70);
+            tempShape = new RectangleShape(0, 0, 120, 70);
         }
         else
         {
-            newShape = new SquareShape(0, 0, 80);
+            tempShape = new SquareShape(0, 0, 80);
         }
 
-        double newX = point.X - newShape.Width / 2;
-        double newY = point.Y - newShape.Height / 2;
+        double newX = point.X - tempShape.Width / 2;
+        double newY = point.Y - tempShape.Height / 2;
 
         if (newX < 0)
             newX = 0;
@@ -278,11 +258,13 @@ public partial class MainWindow : Window
         if (newY < 0)
             newY = 0;
 
-        if (newX + newShape.Width > drawArea.Bounds.Width)
-            newX = drawArea.Bounds.Width - newShape.Width;
+        if (newX + tempShape.Width > drawArea.Bounds.Width)
+            newX = drawArea.Bounds.Width - tempShape.Width;
 
-        if (newY + newShape.Height > drawArea.Bounds.Height)
-            newY = drawArea.Bounds.Height - newShape.Height;
+        if (newY + tempShape.Height > drawArea.Bounds.Height)
+            newY = drawArea.Bounds.Height - tempShape.Height;
+
+        ShapeBase newShape;
 
         if (currentTool == EditorTool.Circle)
         {

@@ -16,14 +16,12 @@ D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Vulkan.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Controls.ColorPicker.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Desktop.dll
-D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Diagnostics.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Fonts.Inter.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.FreeDesktop.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Native.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Remote.Protocol.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Skia.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Themes.Fluent.dll
-D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Themes.Simple.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Win32.Automation.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.Win32.dll
 D:\lab_four_oop\bin\Debug\net10.0\Avalonia.X11.dll
