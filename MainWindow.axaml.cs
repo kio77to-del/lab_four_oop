@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -75,7 +76,54 @@ public partial class MainWindow : Window
         if (e.Key == Key.Delete)
         {
             DeleteSelectedShapes();
+            return;
         }
+
+        if (e.Key == Key.Left)
+        {
+            MoveSelectedShapes(-10, 0);
+            return;
+        }
+
+        if (e.Key == Key.Right)
+        {
+            MoveSelectedShapes(10, 0);
+            return;
+        }
+
+        if (e.Key == Key.Up)
+        {
+            MoveSelectedShapes(0, -10);
+            return;
+        }
+
+        if (e.Key == Key.Down)
+        {
+            MoveSelectedShapes(0, 10);
+            return;
+        }
+    }
+
+    private void MoveSelectedShapes(double dx, double dy)
+    {
+        var drawArea = this.FindControl<DrawingArea>("DrawArea");
+        var selectedShapes = storage.GetSelected();
+
+        if (selectedShapes.Count == 0)
+        {
+            UpdateStatus("Нет выделенных фигур");
+            return;
+        }
+
+        Rect bounds = new Rect(0, 0, drawArea.Bounds.Width, drawArea.Bounds.Height);
+
+        foreach (var shape in selectedShapes)
+        {
+            shape.Move(dx, dy, bounds);
+        }
+
+        drawArea.InvalidateVisual();
+        UpdateStatus("Фигуры перемещены");
     }
 
     private void DeleteSelectedShapes()
@@ -91,6 +139,8 @@ public partial class MainWindow : Window
     private void OnDrawAreaPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var drawArea = this.FindControl<DrawingArea>("DrawArea");
+        drawArea.Focus();
+
         var point = e.GetPosition(drawArea);
 
         bool ctrlPressed = e.KeyModifiers.HasFlag(KeyModifiers.Control);
