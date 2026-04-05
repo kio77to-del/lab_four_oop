@@ -28,6 +28,7 @@ public partial class MainWindow : Window
         var triangleButton = this.FindControl<Button>("TriangleButton");
         var clearButton = this.FindControl<Button>("ClearButton");
         var deleteButton = this.FindControl<Button>("DeleteButton");
+        var clearSelectionButton = this.FindControl<Button>("ClearSelectionButton");
         var applyColorButton = this.FindControl<Button>("ApplyColorButton");
 
         circleButton.Click += OnCircleButtonClick;
@@ -37,6 +38,7 @@ public partial class MainWindow : Window
         triangleButton.Click += OnTriangleButtonClick;
         clearButton.Click += OnClearButtonClick;
         deleteButton.Click += OnDeleteButtonClick;
+        clearSelectionButton.Click += OnClearSelectionButtonClick;
         applyColorButton.Click += OnApplyColorButtonClick;
 
         drawArea.PointerPressed += OnDrawAreaPointerPressed;
@@ -88,6 +90,16 @@ public partial class MainWindow : Window
     private void OnDeleteButtonClick(object? sender, RoutedEventArgs e)
     {
         DeleteSelectedShapes();
+    }
+
+    private void OnClearSelectionButtonClick(object? sender, RoutedEventArgs e)
+    {
+        var drawArea = this.FindControl<DrawingArea>("DrawArea");
+
+        storage.ClearSelection();
+        drawArea.InvalidateVisual();
+
+        UpdateStatus("Выделение снято");
     }
 
     private void OnApplyColorButtonClick(object? sender, RoutedEventArgs e)

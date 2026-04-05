@@ -66,6 +66,10 @@
                     Content="Удалить выделенные"
                     Height="36"/>
 
+            <Button Name="ClearSelectionButton"
+                    Content="Снять выделение"
+                    Height="36"/>
+
             <Button Name="ClearButton"
                     Content="Очистить всё"
                     Height="36"/>
