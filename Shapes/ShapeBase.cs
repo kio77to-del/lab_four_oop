@@ -14,6 +14,11 @@ public abstract class ShapeBase
 
     public IBrush FillBrush { get; set; }
 
+    public double X => x;
+    public double Y => y;
+    public double Width => width;
+    public double Height => height;
+
     protected ShapeBase(double x, double y, double width, double height)
     {
         this.x = x;

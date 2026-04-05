@@ -36,17 +36,19 @@ public class ShapeStorage
         shapes.Clear();
     }
 
-    public ShapeBase? FindShapeAt(double x, double y)
+    public List<ShapeBase> FindAllShapesAt(double x, double y)
     {
-        for (int i = shapes.Count - 1; i >= 0; i--)
+        List<ShapeBase> foundShapes = new List<ShapeBase>();
+
+        foreach (var shape in shapes)
         {
-            if (shapes[i].ContainsPoint(x, y))
+            if (shape.ContainsPoint(x, y))
             {
-                return shapes[i];
+                foundShapes.Add(shape);
             }
         }
 
-        return null;
+        return foundShapes;
     }
 
     public int CountSelected()
