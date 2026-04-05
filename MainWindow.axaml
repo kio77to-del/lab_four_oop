@@ -2,8 +2,69 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
+        d:DesignWidth="1000"
+        d:DesignHeight="700"
         x:Class="lab_four_oop.MainWindow"
-        Title="lab_four_oop">
-    Welcome to Avalonia!
+        Title="Лабораторная работа 4 - Визуальный редактор"
+        Width="1000"
+        Height="700">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          ColumnDefinitions="*,220">
+
+        <Border Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Background="#DDDDDD"
+                Padding="10">
+            <TextBlock Text="Визуальный редактор фигур"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+        </Border>
+
+        <Border Grid.Row="1"
+                Grid.Column="0"
+                Margin="10"
+                Background="White"
+                BorderBrush="Black"
+                BorderThickness="1">
+            <TextBlock Text="Здесь будет область рисования"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="18"/>
+        </Border>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10"
+                    Spacing="10">
+
+            <TextBlock Text="Инструменты"
+                       FontSize="18"
+                       FontWeight="Bold"/>
+
+            <Button Name="CircleButton" Content="Круг"/>
+            <Button Name="RectangleButton" Content="Прямоугольник"/>
+            <Button Name="SquareButton" Content="Квадрат"/>
+
+            <Separator/>
+
+            <Button Name="DeleteButton" Content="Удалить выделенные"/>
+            <Button Name="ClearButton" Content="Очистить всё"/>
+            <Button Name="ColorButton" Content="Изменить цвет"/>
+
+        </StackPanel>
+
+        <Border Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Background="#DDDDDD"
+                Padding="8">
+            <TextBlock Name="StatusTextBlock"
+                       Text="Статус: приложение запущено"/>
+        </Border>
+
+    </Grid>
 </Window>

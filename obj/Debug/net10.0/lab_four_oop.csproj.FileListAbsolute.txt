@@ -71,3 +71,4 @@ D:\lab_four_oop\obj\Debug\net10.0\refint\lab_four_oop.dll
 D:\lab_four_oop\obj\Debug\net10.0\lab_four_oop.pdb
 D:\lab_four_oop\obj\Debug\net10.0\lab_four_oop.genruntimeconfig.cache
 D:\lab_four_oop\obj\Debug\net10.0\ref\lab_four_oop.dll
+D:\lab_four_oop\obj\Debug\net10.0\lab_four_oop.sourcelink.json
