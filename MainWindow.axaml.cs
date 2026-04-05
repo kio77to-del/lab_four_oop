@@ -24,6 +24,8 @@ public partial class MainWindow : Window
         var circleButton = this.FindControl<Button>("CircleButton");
         var rectangleButton = this.FindControl<Button>("RectangleButton");
         var squareButton = this.FindControl<Button>("SquareButton");
+        var ellipseButton = this.FindControl<Button>("EllipseButton");
+        var triangleButton = this.FindControl<Button>("TriangleButton");
         var clearButton = this.FindControl<Button>("ClearButton");
         var deleteButton = this.FindControl<Button>("DeleteButton");
         var applyColorButton = this.FindControl<Button>("ApplyColorButton");
@@ -31,6 +33,8 @@ public partial class MainWindow : Window
         circleButton.Click += OnCircleButtonClick;
         rectangleButton.Click += OnRectangleButtonClick;
         squareButton.Click += OnSquareButtonClick;
+        ellipseButton.Click += OnEllipseButtonClick;
+        triangleButton.Click += OnTriangleButtonClick;
         clearButton.Click += OnClearButtonClick;
         deleteButton.Click += OnDeleteButtonClick;
         applyColorButton.Click += OnApplyColorButtonClick;
@@ -57,6 +61,18 @@ public partial class MainWindow : Window
     {
         currentTool = EditorTool.Square;
         UpdateStatus("Выбран инструмент: квадрат");
+    }
+
+    private void OnEllipseButtonClick(object? sender, RoutedEventArgs e)
+    {
+        currentTool = EditorTool.Ellipse;
+        UpdateStatus("Выбран инструмент: эллипс");
+    }
+
+    private void OnTriangleButtonClick(object? sender, RoutedEventArgs e)
+    {
+        currentTool = EditorTool.Triangle;
+        UpdateStatus("Выбран инструмент: треугольник");
     }
 
     private void OnClearButtonClick(object? sender, RoutedEventArgs e)
@@ -244,9 +260,17 @@ public partial class MainWindow : Window
         {
             tempShape = new RectangleShape(0, 0, 120, 70);
         }
-        else
+        else if (currentTool == EditorTool.Square)
         {
             tempShape = new SquareShape(0, 0, 80);
+        }
+        else if (currentTool == EditorTool.Ellipse)
+        {
+            tempShape = new EllipseShape(0, 0, 120, 80);
+        }
+        else
+        {
+            tempShape = new TriangleShape(0, 0, 100, 90);
         }
 
         double newX = point.X - tempShape.Width / 2;
@@ -274,9 +298,17 @@ public partial class MainWindow : Window
         {
             newShape = new RectangleShape(newX, newY, 120, 70);
         }
-        else
+        else if (currentTool == EditorTool.Square)
         {
             newShape = new SquareShape(newX, newY, 80);
+        }
+        else if (currentTool == EditorTool.Ellipse)
+        {
+            newShape = new EllipseShape(newX, newY, 120, 80);
+        }
+        else
+        {
+            newShape = new TriangleShape(newX, newY, 100, 90);
         }
 
         storage.Add(newShape);
@@ -295,6 +327,10 @@ public partial class MainWindow : Window
             toolName = "прямоугольник";
         else if (currentTool == EditorTool.Square)
             toolName = "квадрат";
+        else if (currentTool == EditorTool.Ellipse)
+            toolName = "эллипс";
+        else if (currentTool == EditorTool.Triangle)
+            toolName = "треугольник";
 
         if (message == "")
         {

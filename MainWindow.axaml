@@ -47,6 +47,8 @@
             <Button Name="CircleButton" Content="Круг"/>
             <Button Name="RectangleButton" Content="Прямоугольник"/>
             <Button Name="SquareButton" Content="Квадрат"/>
+            <Button Name="EllipseButton" Content="Эллипс"/>
+            <Button Name="TriangleButton" Content="Треугольник"/>
 
             <Separator/>
 

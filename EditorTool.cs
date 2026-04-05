@@ -4,5 +4,7 @@ public enum EditorTool
 {
     Circle,
     Rectangle,
-    Square
+    Square,
+    Ellipse,
+    Triangle
 }
