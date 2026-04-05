@@ -227,10 +227,8 @@ public partial class MainWindow : Window
             {
                 storage.ClearSelection();
 
-                foreach (var shape in clickedShapes)
-                {
-                    shape.IsSelected = true;
-                }
+                var topShape = clickedShapes[clickedShapes.Count - 1];
+                topShape.IsSelected = true;
             }
             else
             {

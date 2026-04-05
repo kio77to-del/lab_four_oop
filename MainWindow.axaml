@@ -4,82 +4,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="using:lab_four_oop.Controls"
         mc:Ignorable="d"
-        d:DesignWidth="1100"
-        d:DesignHeight="750"
+        d:DesignWidth="1280"
+        d:DesignHeight="820"
         x:Class="lab_four_oop.MainWindow"
         Title="Лабораторная работа 4 - Визуальный редактор"
-        Width="1100"
-        Height="750">
+        Width="1280"
+        Height="820"
+        Background="White">
 
-    <Grid RowDefinitions="Auto,*,Auto"
-          ColumnDefinitions="*,260">
+    <Grid RowDefinitions="*,42"
+          ColumnDefinitions="*,240">
 
         <Border Grid.Row="0"
                 Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Background="#DDDDDD"
-                Padding="10">
-            <TextBlock Text="Визуальный редактор фигур"
-                       FontSize="20"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"/>
-        </Border>
-
-        <Border Grid.Row="1"
-                Grid.Column="0"
-                Margin="10"
+                Margin="12"
                 Background="White"
-                BorderBrush="Black"
+                BorderBrush="#BFBFBF"
                 BorderThickness="1">
             <local:DrawingArea Name="DrawArea"
                                Focusable="True"/>
         </Border>
 
-        <StackPanel Grid.Row="1"
+        <StackPanel Grid.Row="0"
                     Grid.Column="1"
-                    Margin="10"
+                    Margin="0,12,12,12"
                     Spacing="10">
 
             <TextBlock Text="Инструменты"
+                       FontSize="20"
+                       FontWeight="Bold"/>
+
+            <Button Name="CircleButton" Content="Круг" Height="36"/>
+            <Button Name="RectangleButton" Content="Прямоугольник" Height="36"/>
+            <Button Name="SquareButton" Content="Квадрат" Height="36"/>
+            <Button Name="EllipseButton" Content="Эллипс" Height="36"/>
+            <Button Name="TriangleButton" Content="Треугольник" Height="36"/>
+
+            <Separator Margin="0,6,0,6"/>
+
+            <TextBlock Text="Цвет"
                        FontSize="18"
-                       FontWeight="Bold"/>
-
-            <Button Name="CircleButton" Content="Круг"/>
-            <Button Name="RectangleButton" Content="Прямоугольник"/>
-            <Button Name="SquareButton" Content="Квадрат"/>
-            <Button Name="EllipseButton" Content="Эллипс"/>
-            <Button Name="TriangleButton" Content="Треугольник"/>
-
-            <Separator/>
-
-            <TextBlock Text="Выбор цвета"
-                       FontSize="16"
-                       FontWeight="Bold"/>
+                       FontWeight="SemiBold"/>
 
             <ColorPicker Name="ShapeColorPicker"
                          IsAlphaEnabled="False"
                          IsAlphaVisible="False"
                          IsColorModelVisible="False"
-                         IsHexInputVisible="True"
-                         MinWidth="180"/>
+                         IsHexInputVisible="True"/>
 
-            <Button Name="ApplyColorButton" Content="Применить цвет"/>
+            <Button Name="ApplyColorButton"
+                    Content="Применить цвет"
+                    Height="36"/>
 
-            <Separator/>
+            <Separator Margin="0,6,0,6"/>
 
-            <Button Name="DeleteButton" Content="Удалить выделенные"/>
-            <Button Name="ClearButton" Content="Очистить всё"/>
+            <TextBlock Text="Действия"
+                       FontSize="18"
+                       FontWeight="SemiBold"/>
+
+            <Button Name="DeleteButton"
+                    Content="Удалить выделенные"
+                    Height="36"/>
+
+            <Button Name="ClearButton"
+                    Content="Очистить всё"
+                    Height="36"/>
 
         </StackPanel>
 
-        <Border Grid.Row="2"
+        <Border Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Background="#DDDDDD"
-                Padding="8">
+                Background="White"
+                BorderBrush="#CFCFCF"
+                BorderThickness="1,1,0,0"
+                Padding="12,0">
             <TextBlock Name="StatusTextBlock"
+                       VerticalAlignment="Center"
+                       FontSize="14"
                        Text="Статус: приложение запущено"/>
         </Border>
-
     </Grid>
 </Window>
