@@ -102,6 +102,17 @@ public partial class MainWindow : Window
             MoveSelectedShapes(0, 10);
             return;
         }
+
+        if (e.Key == Key.OemPlus || e.Key == Key.Add)
+        {
+            ResizeSelectedShapes(10, 10);
+            return;
+        }
+
+        if (e.Key == Key.OemMinus || e.Key == Key.Subtract)
+        {
+            ResizeSelectedShapes(-10, -10);
+        }
     }
 
     private void MoveSelectedShapes(double dx, double dy)
@@ -124,6 +135,28 @@ public partial class MainWindow : Window
 
         drawArea.InvalidateVisual();
         UpdateStatus("Фигуры перемещены");
+    }
+
+    private void ResizeSelectedShapes(double dw, double dh)
+    {
+        var drawArea = this.FindControl<DrawingArea>("DrawArea");
+        var selectedShapes = storage.GetSelected();
+
+        if (selectedShapes.Count == 0)
+        {
+            UpdateStatus("Нет выделенных фигур");
+            return;
+        }
+
+        Rect bounds = new Rect(0, 0, drawArea.Bounds.Width, drawArea.Bounds.Height);
+
+        foreach (var shape in selectedShapes)
+        {
+            shape.Resize(dw, dh, bounds);
+        }
+
+        drawArea.InvalidateVisual();
+        UpdateStatus("Размер фигур изменён");
     }
 
     private void DeleteSelectedShapes()
