@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using lab_four_oop.Controls;
 using lab_four_oop.Shapes;
 using lab_four_oop.Storage;
@@ -12,6 +14,18 @@ public partial class MainWindow : Window
 {
     private ShapeStorage storage = new ShapeStorage();
     private EditorTool currentTool = EditorTool.Circle;
+
+    private List<IBrush> availableBrushes = new List<IBrush>
+    {
+        Brushes.LightBlue,
+        Brushes.LightGreen,
+        Brushes.LightPink,
+        Brushes.LightYellow,
+        Brushes.Orange,
+        Brushes.Plum
+    };
+
+    private int currentColorIndex = 0;
 
     public MainWindow()
     {
@@ -25,12 +39,14 @@ public partial class MainWindow : Window
         var squareButton = this.FindControl<Button>("SquareButton");
         var clearButton = this.FindControl<Button>("ClearButton");
         var deleteButton = this.FindControl<Button>("DeleteButton");
+        var colorButton = this.FindControl<Button>("ColorButton");
 
         circleButton.Click += OnCircleButtonClick;
         rectangleButton.Click += OnRectangleButtonClick;
         squareButton.Click += OnSquareButtonClick;
         clearButton.Click += OnClearButtonClick;
         deleteButton.Click += OnDeleteButtonClick;
+        colorButton.Click += OnColorButtonClick;
 
         drawArea.PointerPressed += OnDrawAreaPointerPressed;
         this.KeyDown += OnWindowKeyDown;
@@ -69,6 +85,35 @@ public partial class MainWindow : Window
     private void OnDeleteButtonClick(object? sender, RoutedEventArgs e)
     {
         DeleteSelectedShapes();
+    }
+
+    private void OnColorButtonClick(object? sender, RoutedEventArgs e)
+    {
+        var drawArea = this.FindControl<DrawingArea>("DrawArea");
+        var selectedShapes = storage.GetSelected();
+
+        if (selectedShapes.Count == 0)
+        {
+            UpdateStatus("Нет выделенных фигур");
+            return;
+        }
+
+        currentColorIndex++;
+
+        if (currentColorIndex >= availableBrushes.Count)
+        {
+            currentColorIndex = 0;
+        }
+
+        var newBrush = availableBrushes[currentColorIndex];
+
+        foreach (var shape in selectedShapes)
+        {
+            shape.SetColor(newBrush);
+        }
+
+        drawArea.InvalidateVisual();
+        UpdateStatus("Цвет выделенных фигур изменён");
     }
 
     private void OnWindowKeyDown(object? sender, KeyEventArgs e)
