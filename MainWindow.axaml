@@ -50,7 +50,9 @@
                          IsAlphaEnabled="False"
                          IsAlphaVisible="False"
                          IsColorModelVisible="False"
-                         IsHexInputVisible="True"/>
+                         IsHexInputVisible="True"
+                         Width="110"
+                         HorizontalAlignment="Left"/>
 
             <Button Name="ApplyColorButton"
                     Content="Применить цвет"
